@@ -19,15 +19,30 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.render('home');
+  let options = {
+    pageTitle: "Home",
+    content: homeStartingContent,
+  };
+
+  res.render("home", options);
 });
 
 app.get("/about", (req, res) => {
-  res.render('about');
+  let options = {
+    pageTitle: "About Us",
+    content: aboutContent,
+  };
+
+  res.render("about", options);
 });
 
 app.get("/contact", (req, res) => {
-  res.render('contact');
+  let options = {
+    pageTitle: "Contact Us",
+    content: contactContent,
+  };
+
+  res.render("contact", options);
 });
 
 app.listen(3000, function () {
