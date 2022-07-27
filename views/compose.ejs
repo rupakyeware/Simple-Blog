@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<h1><%= pageTitle %></h1>
+<!--Form to accept input-->
+<form method="post" action="/">
+  <!--Title-->
+  <div class="form-group">
+    <label for="title">Title</label><br />
+    <input type="text" name="title" id="title" class="form-control" /><br />
+  </div>
+  <!--Post-->
+  <div class="form-group">
+    <label for="post">Post</label><br />
+    <textarea
+      name="post"
+      id="post"
+      class="form-control"
+      rows="5"
+      name="post"
+    ></textarea
+    ><br />
+  </div>
+  <button type="submit" name="submit" class="btn btn-primary">Publish</button>
+</form>
+
+<%- include('partials/footer') %>

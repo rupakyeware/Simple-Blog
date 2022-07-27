@@ -18,10 +18,13 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+const posts=[]
+
 app.get("/", (req, res) => {
   let options = {
     pageTitle: "Home",
     content: homeStartingContent,
+    posts: posts
   };
 
   res.render("home", options);
@@ -36,6 +39,19 @@ app.get("/about", (req, res) => {
   res.render("about", options);
 });
 
+app.get('/posts/:title', (req, res) =>{
+  let title = req.params.title;
+  let post = posts.find(element => element.title === title);
+  let options = {
+    title: title,
+    post: post
+  }
+
+  console.log(req.params.title)
+  console.log(post);
+  res.render("post", options);
+})
+
 app.get("/contact", (req, res) => {
   let options = {
     pageTitle: "Contact Us",
@@ -44,6 +60,25 @@ app.get("/contact", (req, res) => {
 
   res.render("contact", options);
 });
+
+app.get("/compose", (req, res) => {
+  let options = {
+    pageTitle: "Compose"
+  };
+
+  res.render("compose", options);
+});
+
+app.post('/', (req, res) => {
+  const newPost = {
+    title: req.body.title,
+    post: req.body.post,
+  } 
+
+  posts.push(newPost);
+  res.redirect('/');
+
+})
 
 app.listen(3000, function () {
   console.log("Server started on port 3000");
